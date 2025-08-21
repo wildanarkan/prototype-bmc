@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VR Education - Entrepreneur Expo Prototype</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #0f3460, #16537e);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #00d4aa, #00a085);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 212, 170, 0.4);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+        }
+
+        .content-section {
+            display: none;
+            padding: 40px 20px;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .slide {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .slide:hover::before {
+            animation: shimmer 1.5s ease;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+        }
+
+        .slide:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+        }
+
+        .slide h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #00d4aa;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: rgba(0, 212, 170, 0.8);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            border-left: 4px solid #00d4aa;
+            transition: all 0.3s ease;
+        }
+
+        .feature-list li:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(10px);
+        }
+
+        .feature-list li strong {
+            color: #00d4aa;
+        }
+
+        .stand-design {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stand-design::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.05) 10px,
+                rgba(255,255,255,0.05) 20px
+            );
+        }
+
+        .stand-design h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stand-elements {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stand-element {
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .qr-section {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            background: white;
+            margin: 20px auto;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #333;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #fc466b, #3f5efb);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .process-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .process-step {
+            background: linear-gradient(135deg, #ffecd2, #fcb69f);
+            color: #333;
+            padding: 20px;
+            border-radius: 50px;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            position: relative;
+        }
+
+        .process-step::after {
+            content: '→';
+            position: absolute;
+            right: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: #00d4aa;
+        }
+
+        .process-step:last-child::after {
+            display: none;
+        }
+
+        .team-info {
+            background: linear-gradient(135deg, #2c3e50, #4a6741);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .navigation {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .nav-btn {
+                font-size: 0.9rem;
+                padding: 10px 18px;
+            }
+            
+            .slide-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-flow {
+                flex-direction: column;
+            }
+            
+            .process-step::after {
+                content: '↓';
+                right: 50%;
+                bottom: -25px;
+                top: auto;
+                transform: translateX(50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🥽 VR EDUCATION INDONESIA</h1>
+            <p>Revolusi Pembelajaran Interaktif untuk Masa Depan Bangsa</p>
+        </div>
+
+        <nav class="navigation">
+            <button class="nav-btn active" onclick="showSection('presentation')">📊 Presentation</button>
+            <button class="nav-btn" onclick="showSection('stand')">🏪 Expo Stand</button>
+            <button class="nav-btn" onclick="showSection('demo')">🎮 Demo</button>
+        </nav>
+
+        <!-- PRESENTATION SECTION -->
+        <section id="presentation" class="content-section active">
+            <div class="slide-container">
+                <!-- Slide 1: Cover -->
+                <div class="slide">
+                    <div class="slide-number">1</div>
+                    <h3>🎯 COVER</h3>
+                    <div class="slide-content">
+                        <h2 style="color: #00d4aa; font-size: 2rem; margin-bottom: 20px;">VR EDUCATION INDONESIA</h2>
+                        <p style="font-size: 1.2rem; margin-bottom: 15px;"><strong>Edukasi Interaktif VR untuk SDM & Ketahanan Pangan</strong></p>
+                        <div class="highlight">Tim: Mark Zuckerberg</div>
+                        <div class="highlight">Gelora FEB UNESA</div>
+                        <p style="margin-top: 20px; font-style: italic;">"Menghadirkan masa depan pendidikan dengan teknologi Virtual Reality"</p>
+                    </div>
+                </div>
+
+                <!-- Slide 2: Issue/Masalah -->
+                <div class="slide">
+                    <div class="slide-number">2</div>
+                    <h3>⚠️ MASALAH UTAMA</h3>
+                    <div class="slide-content">
+                        <ul class="feature-list">
+                            <li><strong>Pembelajaran Konvensional:</strong> Metode belajar tradisional kurang engaging untuk generasi digital</li>
+                            <li><strong>Kesadaran SDM Rendah:</strong> Kurangnya pemahaman pentingnya pengembangan SDM berkualitas</li>
+                            <li><strong>Ketahanan Pangan:</strong> Minimnya edukasi tentang ketahanan pangan nasional</li>
+                            <li><strong>Gap Teknologi:</strong> Indonesia tertinggal dalam adopsi teknologi pendidikan modern</li>
+                        </ul>
+                        <div class="highlight">Sub Tema: Edukasi & Teknologi</div>
+                    </div>
+                </div>
+
+                <!-- Slide 3: Solusi -->
+                <div class="slide">
+                    <div class="slide-number">3</div>
+                    <h3>💡 SOLUSI INOVATIF</h3>
+                    <div class="slide-content">
+                        <ul class="feature-list">
+                            <li><strong>VR Learning Experience:</strong> Pembelajaran immersive yang engaging dan memorable</li>
+                            <li><strong>Konten Edukatif:</strong> Materi khusus SDM dan Ketahanan Pangan dalam format 3D interaktif</li>
+                            <li><strong>Gamifikasi:</strong> Belajar sambil bermain meningkatkan retention rate</li>
+                            <li><strong>Teknologi Terdepan:</strong> Menggunakan VR untuk pengalaman belajar yang tidak terlupakan</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Slide 4: Nama & Pengenalan Produk -->
+                <div class="slide">
+                    <div class="slide-number">4</div>
+                    <h3>🎮 PRODUK KAMI</h3>
+                    <div class="slide-content">
+                        <h2 style="color: #00d4aa; text-align: center; margin-bottom: 20px;">VR EDU INDONESIA</h2>
+                        <ul class="feature-list">
+                            <li><strong>Nama Produk:</strong> VR Education Indonesia - Interactive Learning Platform</li>
+                            <li><strong>Kategori:</strong> Educational VR Application</li>
+                            <li><strong>Target:</strong> Pelajar, Mahasiswa, Institusi Pendidikan</li>
+                            <li><strong>Platform:</strong> VR Headset (Oculus, HTC Vive, etc.)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Slide 5: Distribusi Penggunaan -->
+                <div class="slide">
+                    <div class="slide-number">5</div>
+                    <h3>🌐 DISTRIBUSI & PENGGUNAAN</h3>
+                    <div class="slide-content">
+                        <ul class="feature-list">
+                            <li><strong>Sekolah & Universitas:</strong> Implementasi di kelas dengan fasilitas VR</li>
+                            <li><strong>Museum & Science Center:</strong> Pengalaman edukatif untuk pengunjung</li>
+                            <li><strong>Wisata Edukasi:</strong> Menambah value experience</li>
+                            <li><strong>Online Platform:</strong> Download melalui VR marketplace</li>
+                            <li><strong>Training Center:</strong> Corporate training untuk pengembangan SDM</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Slide 6: Keunikan Produk -->
+                <div class="slide">
+                    <div class="slide-number">6</div>
+                    <h3>⭐ KEUNIKAN PRODUK</h3>
+                    <div class="slide-content">
+                        <ul class="feature-list">
+                            <li><strong>First in Indonesia:</strong> Pionir VR education untuk SDM & ketahanan pangan</li>
+                            <li><strong>Immersive Experience:</strong> 360° virtual environment yang realistis</li>
+                            <li><strong>Interactive Learning:</strong> Hand tracking dan voice interaction</li>
+                            <li><strong>Cultural Context:</strong> Konten disesuaikan dengan kondisi Indonesia</li>
+                            <li><strong>Multi-sensory:</strong> Visual, audio, dan haptic feedback</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Slide 7: Marketing Channel -->
+                <div class="slide">
+                    <div class="slide-number">7</div>
+                    <h3>📢 MARKETING CHANNEL</h3>
+                    <div class="slide-content">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number">🎯</div>
+                                <p><strong>B2B Sales</strong><br>Langsung ke institusi pendidikan</p>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">🛒</div>
+                                <p><strong>Online Store</strong><br>Steam VR, Oculus Store</p>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">🤝</div>
+                                <p><strong>Partnership</strong><br>Kemendikbud & institusi</p>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">📱</div>
+                                <p><strong>Digital Marketing</strong><br>Website & social media</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 8: Media Sosial -->
+                <div class="slide">
+                    <div class="slide-number">8</div>
+                    <h3>📱 MEDIA SOSIAL</h3>
+                    <div class="slide-content">
+                        <ul class="feature-list">
+                            <li><strong>Instagram:</strong> @vreducation_id - Visual content & demo videos</li>
+                            <li><strong>YouTube:</strong> VR Education Indonesia - Tutorial & showcase</li>
+                            <li><strong>TikTok:</strong> @vredu_indonesia - Short educational content</li>
+                            <li><strong>LinkedIn:</strong> VR Education Indonesia - B2B networking</li>
+                            <li><strong>Website:</strong> www.vreducation.id - Official portal</li>
+                        </ul>
+                        <div class="highlight">Target: 10K followers dalam 6 bulan</div>
+                    </div>
+                </div>
+
+                <!-- Slide 9: Proses Pembuatan -->
+                <div class="slide">
+                    <div class="slide-number">9</div>
+                    <h3>⚙️ PROSES PEMBUATAN</h3>
+                    <div class="slide-content">
+                        <div class="process-flow">
+                            <div class="process-step">
+                                <strong>Research</strong><br>
+                                Analisis kebutuhan & kurikulum
+                            </div>
+                            <div class="process-step">
+                                <strong>Design</strong><br>
+                                3D modeling & storyboard
+                            </div>
+                            <div class="process-step">
+                                <strong>Development</strong><br>
+                                Coding & VR integration
+                            </div>
+                            <div class="process-step">
+                                <strong>Testing</strong><br>
+                                Quality assurance & feedback
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 10: Kemasan Produk -->
+                <div class="slide">
+                    <div class="slide-number">10</div>
+                    <h3>📦 KEMASAN PRODUK</h3>
+                    <div class="slide-content">
+                        <ul class="feature-list">
+                            <li><strong>Digital Package:</strong> Downloadable VR application</li>
+                            <li><strong>Educational Kit:</strong> VR headset + software bundle</li>
+                            <li><strong>Enterprise License:</strong> Multi-user institutional package</li>
+                            <li><strong>Training Package:</strong> Software + manual + training session</li>
+                            <li><strong>Premium Edition:</strong> Full content + regular updates</li>
+                        </ul>
+                        <div class="highlight">Harga mulai dari Rp 7.000.000 per lisensi</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="qr-section">
+                <h2>🔗 AKSES PRODUK</h2>
+                <div class="qr-code">QR</div>
+                <p><strong>Scan untuk Demo & Pembelian</strong></p>
+                <p>www.vreducation.id/demo</p>
+            </div>
+
+            <div class="team-info">
+                <h2>👥 TIM DEVELOPER</h2>
+                <p><strong>Mark Zuckerberg</strong> - Project Leader</p>
+                <p>Gelora FEB UNESA</p>
+                <p>📧 officialgelorafebunesa@gmail.com</p>
+                <p>📱 @gelorafeb | @bemfebunesa</p>
+            </div>
+        </section>
+
+        <!-- EXPO STAND SECTION -->
+        <section id="stand" class="content-section">
+            <div class="stand-design">
+                <h2>🏪 DESAIN STAND EXPO</h2>
+                <p>Konsep stand kreatif untuk Entrepreneur Expo</p>
+                
+                <div class="stand-elements">
+                    <div class="stand-element">
+                        <h3>🎯 NAMA STAND</h3>
+                        <p><strong>"VR EDU ZONE"</strong></p>
+                        <p>Future Learning Experience</p>
+                    </div>
+                    
+                    <div class="stand-element">
+                        <h3>🎮 DEMO STATION</h3>
+                        <p>2-3 VR headset untuk experience langsung</p>
+                        <p>Demo aplikasi interaktif</p>
+                    </div>
+                    
+                    <div class="stand-element">
+                        <h3>📺 DISPLAY MONITOR</h3>
+                        <p>Live streaming dari VR experience</p>
+                        <p>Video promosi & tutorial</p>
+                    </div>
+                    
+                    <div class="stand-element">
+                        <h3>🎨 DEKORASI TEMA</h3>
+                        <p>Warna: Biru teknologi + Hijau edukasi</p>
+                        <p>LED strip lighting & hologram effect</p>
+                    </div>
+                    
+                    <div class="stand-element">
+                        <h3>📋 INFO BOARD</h3>
+                        <p>Spesifikasi produk & harga</p>
+                        <p>QR code untuk demo download</p>
+                    </div>
+                    
+                    <div class="stand-element">
+                        <h3>🎁 GIVEAWAY</h3>
+                        <p>VR cardboard branded</p>
+                        <p>Sticker & pin merchandise</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h3>📐 LAYOUT STAND (3x3 meter)</h3>
+                <div class="slide-content">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; text-align: center; margin: 20px 0;">
+                        <div style="background: rgba(0,212,170,0.3); padding: 15px; border-radius: 10px;">
+                            <strong>DEMO VR #1</strong><br>
+                            Ketahanan Pangan
+                        </div>
+                        <div style="background: rgba(255,107,107,0.3); padding: 15px; border-radius: 10px;">
+                            <strong>MAIN DISPLAY</strong><br>
+                            Logo & Video
+                        </div>
+                        <div style="background: rgba(0,212,170,0.3); padding: 15px; border-radius: 10px;">
+                            <strong>DEMO VR #2</strong><br>
+                            Pengembangan SDM
+                        </div>
+                        <div style="background: rgba(116,75,162,0.3); padding: 15px; border-radius: 10px;">
+                            <strong>INFO DESK</strong><br>
+                            Presenter Area
+                        </div>
+                        <div style="background: rgba(252,70,107,0.3); padding: 15px; border-radius: 10px;">
+                            <strong>NETWORKING</strong><br>
+                            Meeting Space
+                        </div>
+                        <div style="background: rgba(116,75,162,0.3); padding: 15px; border-radius: 10px;">
+                            <strong>MERCHANDISE</strong><br>
+                            Giveaway Corner
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h3>🎪 KONSEP DEKORASI KREATIF</h3>
+                <div class="slide-content">
+                    <ul class="feature-list">
+                        <li><strong>Backdrop Futuristik:</strong> Panel LED dengan animasi VR visualization</li>
+                        <li><strong>Floating Hologram:</strong> Proyeksi 3D logo VR Education Indonesia</li>
+                        <li><strong>Interactive Floor:</strong> Sensor lantai yang respond terhadap gerakan</li>
+                        <li><strong>Neon Accent:</strong> Strip LED warna biru-hijau dengan pola circuit board</li>
+                        <li><strong>Suspended Elements:</strong> VR headset menggantung sebagai art installation</li>
+                        <li><strong>Digital Totems:</strong> Monitor touchscreen untuk navigasi informasi</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEMO SECTION -->
+        <section id="demo" class="content-section">
+            <div class="slide">
+                <h3>🎮 LIVE DEMO EXPERIENCE</h3>
+                <div class="slide-content">
+                    <h2 style="text-align: center; color: #00d4aa; margin-bottom: 30px;">Interactive VR Demo</h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">🥽</div>
+                            <h4>VR Experience</h4>
+                            <p>5 menit demo pengalaman VR pembelajaran SDM</p>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">🌾</div>
+                            <h4>Ketahanan Pangan</h4>
+                            <p>Simulasi virtual farm management</p>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">👥</div>
+                            <h4>SDM Training</h4>
+                            <p>Virtual workshop pengembangan skill</p>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">📱</div>
+                            <h4>Mobile Version</h4>
+                            <p>VR cardboard untuk smartphone</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="qr-section">
+                <h2>📲 DOWNLOAD DEMO</h2>
+                <div class="qr-code">📱</div>
+                <p><strong>Scan untuk download demo mobile</strong></p>
+                <p>Compatible dengan VR cardboard</p>
+                <div class="highlight">FREE TRIAL - 7 hari</div>
+            </div>
+
+            <div class="slide">
+                <h3>💰 PRICING & PACKAGES</h3>
+                <div class="slide-content">
+                    <div class="stats-grid">
+                        <div class="stat-card" style="background: linear-gradient(135deg, #11998e, #38ef7d);">
+                            <div class="stat-number">📚</div>
+                            <h4>Student License</h4>
+                            <p><strong>Rp 500.000</strong></p>
+                            <p>Individual license, basic content</p>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <div class="stat-number
