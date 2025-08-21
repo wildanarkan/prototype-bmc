@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VutuRe Project - Belajar Lebih Nyata, Masa Depan Lebih Kuat</title>
+    <title>VR Education - Entrepreneur Expo Prototype</title>
     <style>
         * {
             margin: 0;
@@ -12,917 +12,892 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: white;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            overflow-x: hidden;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            position: relative;
         }
 
-        /* Header */
-        header {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #2c3e50;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            transition: all 0.3s;
-        }
-
-        .nav-links a:hover {
-            background: #3498db;
-            color: white;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 140px 0 100px;
-            background: white;
-            color: #2c3e50;
+        .header {
             text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #0f3460, #16537e);
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
+        .header::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><linearGradient id="vrGlow" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%233498db;stop-opacity:0.1"/><stop offset="100%" style="stop-color:%2374b9ff;stop-opacity:0.05"/></linearGradient></defs><circle cx="200" cy="200" r="3" fill="%233498db" opacity="0.3"><animate attributeName="r" values="3;6;3" dur="2s" repeatCount="indefinite"/></circle><circle cx="800" cy="300" r="2" fill="%2374b9ff" opacity="0.4"><animate attributeName="r" values="2;5;2" dur="3s" repeatCount="indefinite"/></circle><circle cx="400" cy="700" r="4" fill="%233498db" opacity="0.2"><animate attributeName="r" values="4;7;4" dur="2.5s" repeatCount="indefinite"/></circle><rect x="100" y="100" width="20" height="20" fill="url(%23vrGlow)" opacity="0.3" transform="rotate(45 110 110)"><animateTransform attributeName="transform" type="rotate" values="0 110 110;360 110 110" dur="10s" repeatCount="indefinite"/></rect><rect x="700" y="600" width="15" height="15" fill="url(%23vrGlow)" opacity="0.4" transform="rotate(45 707 607)"><animateTransform attributeName="transform" type="rotate" values="360 707 607;0 707 607" dur="8s" repeatCount="indefinite"/></rect></svg>');
-            opacity: 0.6;
-            animation: float 15s ease-in-out infinite;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(2deg); }
-        }
-
-        .hero-content {
+        .header h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
             position: relative;
             z-index: 2;
-            max-width: 800px;
-            margin: 0 auto;
         }
 
-        .vr-hero-visual {
-            margin: 2rem 0;
-            font-size: 6rem;
-            color: #3498db;
-            animation: vrPulse 2s ease-in-out infinite;
-            text-shadow: 0 0 20px rgba(52, 152, 219, 0.3);
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
         }
 
-        @keyframes vrPulse {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; }
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .hero h1 {
-            font-size: 4.5rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            color: #2c3e50;
-            text-shadow: none;
-        }
-
-        .hero .tagline {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 2.5rem;
-            color: #3498db;
-            text-shadow: none;
-        }
-
-        .hero .subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 3rem;
-            opacity: 0.8;
-            line-height: 1.8;
-            color: #666;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 18px 40px;
-            background: #3498db;
+        .nav-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #00d4aa, #00a085);
+            border: none;
+            border-radius: 25px;
             color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            background: #2980b9;
-            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
-        }
-
-        /* Sections */
-        .section {
-            padding: 80px 0;
-            background: white;
-        }
-
-        .section:nth-child(even) {
-            background: #f8f9fa;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 3rem;
-            font-weight: bold;
-            margin-bottom: 3rem;
-            color: #2c3e50;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            width: 100px;
-            height: 4px;
-            background: #3498db;
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-
-        /* Why VutuRe Section */
-        .why-vuture {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-            background: #f8f9fa;
-            padding: 3rem;
-            border-radius: 10px;
-            margin-bottom: 4rem;
-            border: 1px solid #e9ecef;
-        }
-
-        .why-vuture p {
-            font-size: 1.3rem;
-            line-height: 1.8;
-            color: #2c3e50;
-            font-weight: 500;
-        }
-
-        /* Features Grid */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 2.5rem 2rem;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
-            border: 1px solid #e9ecef;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            border-color: #3498db;
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-
-        .feature-icon.vr-icon {
-            color: #3498db;
-            animation: vrFloat 3s ease-in-out infinite;
-            text-shadow: 0 0 15px rgba(52, 152, 219, 0.3);
-        }
-
-        .feature-icon.vr-icon::after {
-            content: '';
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            width: 10px;
-            height: 10px;
-            background: #74b9ff;
-            border-radius: 50%;
-            animation: vrPing 2s infinite;
-        }
-
-        @keyframes vrFloat {
-            0%, 100% { transform: translateY(0px) rotateY(0deg); }
-            50% { transform: translateY(-5px) rotateY(10deg); }
-        }
-
-        @keyframes vrPing {
-            0% { transform: scale(0.8); opacity: 1; }
-            100% { transform: scale(2); opacity: 0; }
-        }
-
-        .feature-card h3 {
-            font-size: 1.4rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            color: #2c3e50;
-        }
-
-        .feature-card p {
-            color: #666;
-            line-height: 1.6;
+            cursor: pointer;
             font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
         }
 
-        /* VR Person Illustration */
-        .vr-person-section {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 4rem 2rem;
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 212, 170, 0.4);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+        }
+
+        .content-section {
+            display: none;
+            padding: 40px 20px;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .slide {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
             border-radius: 20px;
-            margin: 3rem 0;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.1);
             position: relative;
             overflow: hidden;
         }
 
-        .vr-person-container {
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .slide:hover::before {
+            animation: shimmer 1.5s ease;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+        }
+
+        .slide:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+        }
+
+        .slide h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #00d4aa;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: rgba(0, 212, 170, 0.8);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 3rem;
-            flex-wrap: wrap;
+            font-weight: bold;
+            font-size: 1.1rem;
         }
 
-        .vr-person {
-            font-size: 8rem;
-            color: #3498db;
-            animation: vrPersonMove 4s ease-in-out infinite;
+        .highlight {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            border-left: 4px solid #00d4aa;
+            transition: all 0.3s ease;
+        }
+
+        .feature-list li:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(10px);
+        }
+
+        .feature-list li strong {
+            color: #00d4aa;
+        }
+
+        .stand-design {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            text-align: center;
             position: relative;
+            overflow: hidden;
         }
 
-        .vr-person::before {
-            content: '🥽';
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.6em;
-            animation: vrHeadsetGlow 2s ease-in-out infinite;
-        }
-
-        .vr-person::after {
+        .stand-design::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100px;
-            height: 100px;
-            border: 3px solid #74b9ff;
-            border-radius: 50%;
-            border-top: 3px solid transparent;
-            animation: vrSpin 3s linear infinite;
-        }
-
-        @keyframes vrPersonMove {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            25% { transform: translateY(-10px) rotate(2deg); }
-            75% { transform: translateY(-5px) rotate(-2deg); }
-        }
-
-        @keyframes vrHeadsetGlow {
-            0%, 100% { filter: brightness(1) drop-shadow(0 0 5px rgba(52, 152, 219, 0.3)); }
-            50% { filter: brightness(1.5) drop-shadow(0 0 15px rgba(52, 152, 219, 0.8)); }
-        }
-
-        @keyframes vrSpin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        .vr-benefits-visual {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .vr-world-preview {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .vr-element {
-            background: white;
-            padding: 1rem;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(52, 152, 219, 0.1);
-            animation: vrElementFloat 3s ease-in-out infinite;
-            animation-delay: var(--delay, 0s);
-        }
-
-        .vr-element:nth-child(1) { --delay: 0s; }
-        .vr-element:nth-child(2) { --delay: 0.5s; }
-        /* About Section */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            margin-bottom: 3rem;
-        }
-
-        .about-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #555;
-        }
-
-        .about-text h3 {
-            color: #2c3e50;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            font-weight: bold;
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .vr-benefits {
-            background: #f8f9fa;
-            color: #2c3e50;
-            padding: 2rem;
-            border-radius: 10px;
-            border: 1px solid #e9ecef;
-        }
-
-        .vr-benefits h3 {
-            color: #2c3e50;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-
-        .vr-benefits ul {
-            list-style: none;
-        }
-
-        .vr-benefits li {
-            padding: 0.5rem 0;
-            position: relative;
-            padding-left: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .vr-benefits li::before {
-            content: '✓';
-            position: absolute;
+            top: 0;
             left: 0;
-            font-weight: bold;
-            color: #3498db;
-            font-size: 1.2rem;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.05) 10px,
+                rgba(255,255,255,0.05) 20px
+            );
         }
 
-        /* Chapters */
-        .chapters-container {
-            text-align: center;
-            margin: 3rem 0;
+        .stand-design h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
         }
 
-        .chapters-intro {
-            background: #f8f9fa;
-            color: #2c3e50;
-            padding: 2rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            border: 1px solid #e9ecef;
-        }
-
-        .chapters-intro h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .chapters-grid {
+        .stand-elements {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+            position: relative;
+            z-index: 2;
         }
 
-        .chapter {
-            background: #3498db;
-            color: white;
-            padding: 2.5rem;
-            border-radius: 10px;
+        .stand-element {
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .qr-section {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            border-radius: 15px;
+            padding: 30px;
             text-align: center;
-            transition: transform 0.3s;
-            box-shadow: 0 2px 10px rgba(52, 152, 219, 0.2);
+            margin: 30px 0;
         }
 
-        .chapter:hover {
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            background: white;
+            margin: 20px auto;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #333;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #fc466b, #3f5efb);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
             transform: scale(1.05);
         }
 
-        .chapter h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
+        .stat-number {
+            font-size: 2.5rem;
             font-weight: bold;
+            margin-bottom: 10px;
         }
 
-        .chapter p {
-            font-size: 1.1rem;
-            line-height: 1.4;
+        .process-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        /* Target Users */
-        .target-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .target-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            border-left: 4px solid #3498db;
-            transition: transform 0.3s;
-            border-right: 1px solid #e9ecef;
-            border-top: 1px solid #e9ecef;
-            border-bottom: 1px solid #e9ecef;
-        }
-
-        .target-card:hover {
-            transform: translateY(-3px);
-        }
-
-        .target-card h3 {
-            color: #2c3e50;
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-        }
-
-        .target-card .arrow {
-            color: #3498db;
-            font-weight: bold;
-            margin: 0 0.5rem;
-        }
-
-        .target-card p {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        /* Business Section */
-        .business-highlight {
-            background: #3498db;
-            color: white;
-            padding: 3rem;
-            border-radius: 10px;
+        .process-step {
+            background: linear-gradient(135deg, #ffecd2, #fcb69f);
+            color: #333;
+            padding: 20px;
+            border-radius: 50px;
             text-align: center;
-            margin: 2rem auto;
-            max-width: 800px;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.2);
-        }
-
-        .business-highlight h3 {
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-            font-weight: bold;
-        }
-
-        .price-highlight {
-            font-size: 3.5rem;
-            font-weight: bold;
-            margin: 1.5rem 0;
-            text-shadow: none;
-        }
-
-        .business-highlight p {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            margin: 1rem 0;
-        }
-
-        .business-highlight .subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        /* Roadmap */
-        .roadmap-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .roadmap-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            flex: 1;
+            min-width: 200px;
             position: relative;
-            border-top: 4px solid #3498db;
-            transition: transform 0.3s;
-            border-right: 1px solid #e9ecef;
-            border-left: 1px solid #e9ecef;
-            border-bottom: 1px solid #e9ecef;
         }
 
-        .roadmap-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .roadmap-phase {
-            background: #3498db;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: bold;
+        .process-step::after {
+            content: '→';
             position: absolute;
-            top: -15px;
-            left: 20px;
+            right: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: #00d4aa;
         }
 
-        .roadmap-card h3 {
-            margin: 1.5rem 0 1rem 0;
-            color: #2c3e50;
-            font-size: 1.4rem;
-            font-weight: bold;
+        .process-step:last-child::after {
+            display: none;
         }
 
-        .roadmap-card p {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        /* Footer */
-        footer {
-            background: #2c3e50;
-            color: white;
+        .team-info {
+            background: linear-gradient(135deg, #2c3e50, #4a6741);
+            border-radius: 20px;
+            padding: 30px;
             text-align: center;
-            padding: 3rem 0;
+            margin: 30px 0;
         }
 
-        footer p {
-            font-size: 1.1rem;
-        }
-
-        /* Responsive Design */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+            .header h1 {
+                font-size: 2rem;
             }
-
-            .hero h1 {
-                font-size: 3rem;
+            
+            .navigation {
+                flex-wrap: wrap;
+                gap: 10px;
             }
-
-            .hero .tagline {
-                font-size: 1.5rem;
+            
+            .nav-btn {
+                font-size: 0.9rem;
+                padding: 10px 18px;
             }
-
-            .about-grid {
+            
+            .slide-container {
                 grid-template-columns: 1fr;
-                gap: 2rem;
             }
-
-            .section-title {
-                font-size: 2.2rem;
+            
+            .process-flow {
+                flex-direction: column;
             }
-
-            .business-highlight {
-                padding: 2rem;
+            
+            .process-step::after {
+                content: '↓';
+                right: 50%;
+                bottom: -25px;
+                top: auto;
+                transform: translateX(50%);
             }
-
-            .price-highlight {
-                font-size: 2.5rem;
-            }
-        }
-
-        /* Animation Classes */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease-out;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <header>
-        <nav class="container">
-            <div class="logo">VutuRe</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">Tentang</a></li>
-                <li><a href="#features">Fitur</a></li>
-                <li><a href="#target">Target</a></li>
-                <li><a href="#business">Bisnis</a></li>
-                <li><a href="#roadmap">Roadmap</a></li>
-            </ul>
+    <div class="container">
+        <div class="header">
+            <h1>🥽 VR EDUCATION INDONESIA</h1>
+            <p>Revolusi Pembelajaran Interaktif untuk Masa Depan Bangsa</p>
+        </div>
+
+        <nav class="navigation">
+            <button class="nav-btn active" onclick="showSection('presentation')">📊 Presentation</button>
+            <button class="nav-btn" onclick="showSection('stand')">🏪 Expo Stand</button>
+            <button class="nav-btn" onclick="showSection('demo')">🎮 Demo</button>
         </nav>
-    </header>
 
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="vr-hero-visual">🥽</div>
-                <h1>VutuRe Project</h1>
-                <p class="tagline">Belajar Lebih Nyata, Masa Depan Lebih Kuat</p>
-                <p class="subtitle">Platform edukasi Virtual Reality yang menggabungkan game interaktif 3D dengan misi pembelajaran untuk pengalaman belajar yang imersif dan bermakna</p>
-                <a href="#about" class="cta-button">Mulai Jelajahi</a>
-            </div>
-        </div>
-    </section>
+        <!-- PRESENTATION SECTION -->
+        <section id="presentation" class="content-section active">
+            <div class="slide-container">
+                <!-- Slide 1: Cover -->
+                <div class="slide">
+                    <div class="slide-number">1</div>
+                    <h3>🎯 COVER</h3>
+                    <div class="slide-content">
+                        <h2 style="color: #00d4aa; font-size: 2rem; margin-bottom: 20px;">VR EDUCATION INDONESIA</h2>
+                        <p style="font-size: 1.2rem; margin-bottom: 15px;"><strong>Edukasi Interaktif VR untuk SDM & Ketahanan Pangan</strong></p>
+                        <div class="highlight">Tim: Mark Zuckerberg</div>
+                        <div class="highlight">Gelora FEB UNESA</div>
+                        <p style="margin-top: 20px; font-style: italic;">"Menghadirkan masa depan pendidikan dengan teknologi Virtual Reality"</p>
+                    </div>
+                </div>
 
-    <section id="features" class="section">
-        <div class="container">
-            <h2 class="section-title fade-in">Kenapa VutuRe Project?</h2>
-            
-            <div class="why-vuture fade-in">
-                <p>Di VutuRe Project, kami percaya bahwa teknologi bukan hanya soal kecanggihan, tapi tentang bagaimana kita menggunakannya untuk memberi manfaat nyata bagi banyak orang</p>
-            </div>
+                <!-- Slide 2: Issue/Masalah -->
+                <div class="slide">
+                    <div class="slide-number">2</div>
+                    <h3>⚠️ MASALAH UTAMA</h3>
+                    <div class="slide-content">
+                        <ul class="feature-list">
+                            <li><strong>Pembelajaran Konvensional:</strong> Metode belajar tradisional kurang engaging untuk generasi digital</li>
+                            <li><strong>Kesadaran SDM Rendah:</strong> Kurangnya pemahaman pentingnya pengembangan SDM berkualitas</li>
+                            <li><strong>Ketahanan Pangan:</strong> Minimnya edukasi tentang ketahanan pangan nasional</li>
+                            <li><strong>Gap Teknologi:</strong> Indonesia tertinggal dalam adopsi teknologi pendidikan modern</li>
+                        </ul>
+                        <div class="highlight">Sub Tema: Edukasi & Teknologi</div>
+                    </div>
+                </div>
 
-            <div class="features-grid fade-in">
-                <div class="feature-card">
-                    <div class="feature-icon vr-icon">🎯</div>
-                    <h3>Mudah & Praktis</h3>
-                    <p>Semua fitur dirancang simple agar siapa pun bisa langsung menggunakannya</p>
+                <!-- Slide 3: Solusi -->
+                <div class="slide">
+                    <div class="slide-number">3</div>
+                    <h3>💡 SOLUSI INOVATIF</h3>
+                    <div class="slide-content">
+                        <ul class="feature-list">
+                            <li><strong>VR Learning Experience:</strong> Pembelajaran immersive yang engaging dan memorable</li>
+                            <li><strong>Konten Edukatif:</strong> Materi khusus SDM dan Ketahanan Pangan dalam format 3D interaktif</li>
+                            <li><strong>Gamifikasi:</strong> Belajar sambil bermain meningkatkan retention rate</li>
+                            <li><strong>Teknologi Terdepan:</strong> Menggunakan VR untuk pengalaman belajar yang tidak terlupakan</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon vr-icon">🎮</div>
-                    <h3>Edukasi & Inspirasi</h3>
-                    <p>Tidak hanya sekadar aplikasi, tapi juga ruang untuk belajar, berkembang, dan menemukan ide baru</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon vr-icon">🌐</div>
-                    <h3>Kolaborasi Tanpa Batas</h3>
-                    <p>Menghubungkan individu, komunitas, hingga bisnis untuk tumbuh bersama</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon vr-icon">🚀</div>
-                    <h3>Masa Depan Berkelanjutan</h3>
-                    <p>VutuRe Project mendukung gerakan digital yang ramah lingkungan dan berorientasi ke masa depan</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <section id="about" class="section">
-        <div class="container">
-            <h2 class="section-title fade-in">Apa itu VutuRe?</h2>
-            
-            <div class="vr-person-section fade-in">
-                <div class="vr-person-container">
-                    <div class="vr-person">🧑‍💻</div>
-                    <div class="vr-benefits-visual">
-                        <h3 style="color: #2c3e50; text-align: center; margin-bottom: 1rem;">Dengan VR kamu bisa:</h3>
-                        <div class="vr-world-preview">
-                            <div class="vr-element">
-                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🌍</div>
-                                <p><strong>Masuk ke dunia 3D interaktif</strong></p>
+                <!-- Slide 4: Nama & Pengenalan Produk -->
+                <div class="slide">
+                    <div class="slide-number">4</div>
+                    <h3>🎮 PRODUK KAMI</h3>
+                    <div class="slide-content">
+                        <h2 style="color: #00d4aa; text-align: center; margin-bottom: 20px;">VR EDU INDONESIA</h2>
+                        <ul class="feature-list">
+                            <li><strong>Nama Produk:</strong> VR Education Indonesia - Interactive Learning Platform</li>
+                            <li><strong>Kategori:</strong> Educational VR Application</li>
+                            <li><strong>Target:</strong> Pelajar, Mahasiswa, Institusi Pendidikan</li>
+                            <li><strong>Platform:</strong> VR Headset (Oculus, HTC Vive, etc.)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Slide 5: Distribusi Penggunaan -->
+                <div class="slide">
+                    <div class="slide-number">5</div>
+                    <h3>🌐 DISTRIBUSI & PENGGUNAAN</h3>
+                    <div class="slide-content">
+                        <ul class="feature-list">
+                            <li><strong>Sekolah & Universitas:</strong> Implementasi di kelas dengan fasilitas VR</li>
+                            <li><strong>Museum & Science Center:</strong> Pengalaman edukatif untuk pengunjung</li>
+                            <li><strong>Wisata Edukasi:</strong> Menambah value experience</li>
+                            <li><strong>Online Platform:</strong> Download melalui VR marketplace</li>
+                            <li><strong>Training Center:</strong> Corporate training untuk pengembangan SDM</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Slide 6: Keunikan Produk -->
+                <div class="slide">
+                    <div class="slide-number">6</div>
+                    <h3>⭐ KEUNIKAN PRODUK</h3>
+                    <div class="slide-content">
+                        <ul class="feature-list">
+                            <li><strong>First in Indonesia:</strong> Pionir VR education untuk SDM & ketahanan pangan</li>
+                            <li><strong>Immersive Experience:</strong> 360° virtual environment yang realistis</li>
+                            <li><strong>Interactive Learning:</strong> Hand tracking dan voice interaction</li>
+                            <li><strong>Cultural Context:</strong> Konten disesuaikan dengan kondisi Indonesia</li>
+                            <li><strong>Multi-sensory:</strong> Visual, audio, dan haptic feedback</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Slide 7: Marketing Channel -->
+                <div class="slide">
+                    <div class="slide-number">7</div>
+                    <h3>📢 MARKETING CHANNEL</h3>
+                    <div class="slide-content">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number">🎯</div>
+                                <p><strong>B2B Sales</strong><br>Langsung ke institusi pendidikan</p>
                             </div>
-                            <div class="vr-element">
-                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎓</div>
-                                <p><strong>Main sambil belajar</strong></p>
+                            <div class="stat-card">
+                                <div class="stat-number">🛒</div>
+                                <p><strong>Online Store</strong><br>Steam VR, Oculus Store</p>
                             </div>
-                            <div class="vr-element">
-                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">✨</div>
-                                <p><strong>Rasain pengalaman nyata, bukan cuma teori</strong></p>
+                            <div class="stat-card">
+                                <div class="stat-number">🤝</div>
+                                <p><strong>Partnership</strong><br>Kemendikbud & institusi</p>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">📱</div>
+                                <p><strong>Digital Marketing</strong><br>Website & social media</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="about-grid fade-in">
-                <div class="about-text">
-                    <h3>Inovasi Media Edukasi VR</h3>
-                    <p><strong>VutuRe adalah inovasi media edukasi berbasis Virtual Reality (VR)</strong> yang menggabungkan game interaktif 3D dengan misi edukasi. VutuRe Project hadir sebagai platform digital yang dirancang untuk mempermudah, menghubungkan, sekaligus memberdayakan.</p>
-                    
-                    <p>Kami percaya bahwa belajar bisa lebih menyenangkan, nyata, dan bermakna jika dikemas melalui teknologi imersif.</p>
+
+                <!-- Slide 8: Media Sosial -->
+                <div class="slide">
+                    <div class="slide-number">8</div>
+                    <h3>📱 MEDIA SOSIAL</h3>
+                    <div class="slide-content">
+                        <ul class="feature-list">
+                            <li><strong>Instagram:</strong> @vreducation_id - Visual content & demo videos</li>
+                            <li><strong>YouTube:</strong> VR Education Indonesia - Tutorial & showcase</li>
+                            <li><strong>TikTok:</strong> @vredu_indonesia - Short educational content</li>
+                            <li><strong>LinkedIn:</strong> VR Education Indonesia - B2B networking</li>
+                            <li><strong>Website:</strong> www.vreducation.id - Official portal</li>
+                        </ul>
+                        <div class="highlight">Target: 10K followers dalam 6 bulan</div>
+                    </div>
                 </div>
+
+                <!-- Slide 9: Proses Pembuatan -->
+                <div class="slide">
+                    <div class="slide-number">9</div>
+                    <h3>⚙️ PROSES PEMBUATAN</h3>
+                    <div class="slide-content">
+                        <div class="process-flow">
+                            <div class="process-step">
+                                <strong>Research</strong><br>
+                                Analisis kebutuhan & kurikulum
+                            </div>
+                            <div class="process-step">
+                                <strong>Design</strong><br>
+                                3D modeling & storyboard
+                            </div>
+                            <div class="process-step">
+                                <strong>Development</strong><br>
+                                Coding & VR integration
+                            </div>
+                            <div class="process-step">
+                                <strong>Testing</strong><br>
+                                Quality assurance & feedback
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 10: Kemasan Produk -->
+                <div class="slide">
+                    <div class="slide-number">10</div>
+                    <h3>📦 KEMASAN PRODUK</h3>
+                    <div class="slide-content">
+                        <ul class="feature-list">
+                            <li><strong>Digital Package:</strong> Downloadable VR application</li>
+                            <li><strong>Educational Kit:</strong> VR headset + software bundle</li>
+                            <li><strong>Enterprise License:</strong> Multi-user institutional package</li>
+                            <li><strong>Training Package:</strong> Software + manual + training session</li>
+                            <li><strong>Premium Edition:</strong> Full content + regular updates</li>
+                        </ul>
+                        <div class="highlight">Harga mulai dari Rp 7.000.000 per lisensi</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="qr-section">
+                <h2>🔗 AKSES PRODUK</h2>
+                <div class="qr-code">QR</div>
+                <p><strong>Scan untuk Demo & Pembelian</strong></p>
+                <p>www.vreducation.id/demo</p>
+            </div>
+
+            <div class="team-info">
+                <h2>👥 TIM DEVELOPER</h2>
+                <p><strong>Mark Zuckerberg</strong> - Project Leader</p>
+                <p>Gelora FEB UNESA</p>
+                <p>📧 officialgelorafebunesa@gmail.com</p>
+                <p>📱 @gelorafeb | @bemfebunesa</p>
+            </div>
+        </section>
+
+        <!-- EXPO STAND SECTION -->
+        <section id="stand" class="content-section">
+            <div class="stand-design">
+                <h2>🏪 DESAIN STAND EXPO</h2>
+                <p>Konsep stand kreatif untuk Entrepreneur Expo</p>
                 
-                <div class="vr-benefits">
-                    <h3>Teknologi VR Terdepan</h3>
-                    <ul>
-                        <li>Pengalaman pembelajaran imersif 360°</li>
-                        <li>Interaksi real-time dengan objek virtual</li>
-                        <li>Simulasi lingkungan yang realistis</li>
-                        <li>Dukungan multi-platform VR headset</li>
+                <div class="stand-elements">
+                    <div class="stand-element">
+                        <h3>🎯 NAMA STAND</h3>
+                        <p><strong>"VR EDU ZONE"</strong></p>
+                        <p>Future Learning Experience</p>
+                    </div>
+                    
+                    <div class="stand-element">
+                        <h3>🎮 DEMO STATION</h3>
+                        <p>2-3 VR headset untuk experience langsung</p>
+                        <p>Demo aplikasi interaktif</p>
+                    </div>
+                    
+                    <div class="stand-element">
+                        <h3>📺 DISPLAY MONITOR</h3>
+                        <p>Live streaming dari VR experience</p>
+                        <p>Video promosi & tutorial</p>
+                    </div>
+                    
+                    <div class="stand-element">
+                        <h3>🎨 DEKORASI TEMA</h3>
+                        <p>Warna: Biru teknologi + Hijau edukasi</p>
+                        <p>LED strip lighting & hologram effect</p>
+                    </div>
+                    
+                    <div class="stand-element">
+                        <h3>📋 INFO BOARD</h3>
+                        <p>Spesifikasi produk & harga</p>
+                        <p>QR code untuk demo download</p>
+                    </div>
+                    
+                    <div class="stand-element">
+                        <h3>🎁 GIVEAWAY</h3>
+                        <p>VR cardboard branded</p>
+                        <p>Sticker & pin merchandise</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h3>📐 LAYOUT STAND (3x3 meter)</h3>
+                <div class="slide-content">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; text-align: center; margin: 20px 0;">
+                        <div style="background: rgba(0,212,170,0.3); padding: 15px; border-radius: 10px;">
+                            <strong>DEMO VR #1</strong><br>
+                            Ketahanan Pangan
+                        </div>
+                        <div style="background: rgba(255,107,107,0.3); padding: 15px; border-radius: 10px;">
+                            <strong>MAIN DISPLAY</strong><br>
+                            Logo & Video
+                        </div>
+                        <div style="background: rgba(0,212,170,0.3); padding: 15px; border-radius: 10px;">
+                            <strong>DEMO VR #2</strong><br>
+                            Pengembangan SDM
+                        </div>
+                        <div style="background: rgba(116,75,162,0.3); padding: 15px; border-radius: 10px;">
+                            <strong>INFO DESK</strong><br>
+                            Presenter Area
+                        </div>
+                        <div style="background: rgba(252,70,107,0.3); padding: 15px; border-radius: 10px;">
+                            <strong>NETWORKING</strong><br>
+                            Meeting Space
+                        </div>
+                        <div style="background: rgba(116,75,162,0.3); padding: 15px; border-radius: 10px;">
+                            <strong>MERCHANDISE</strong><br>
+                            Giveaway Corner
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h3>🎪 KONSEP DEKORASI KREATIF</h3>
+                <div class="slide-content">
+                    <ul class="feature-list">
+                        <li><strong>Backdrop Futuristik:</strong> Panel LED dengan animasi VR visualization</li>
+                        <li><strong>Floating Hologram:</strong> Proyeksi 3D logo VR Education Indonesia</li>
+                        <li><strong>Interactive Floor:</strong> Sensor lantai yang respond terhadap gerakan</li>
+                        <li><strong>Neon Accent:</strong> Strip LED warna biru-hijau dengan pola circuit board</li>
+                        <li><strong>Suspended Elements:</strong> VR headset menggantung sebagai art installation</li>
+                        <li><strong>Digital Totems:</strong> Monitor touchscreen untuk navigasi informasi</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEMO SECTION -->
+        <section id="demo" class="content-section">
+            <div class="slide">
+                <h3>🎮 LIVE DEMO EXPERIENCE</h3>
+                <div class="slide-content">
+                    <h2 style="text-align: center; color: #00d4aa; margin-bottom: 30px;">Interactive VR Demo</h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">🥽</div>
+                            <h4>VR Experience</h4>
+                            <p>5 menit demo pengalaman VR pembelajaran SDM</p>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">🌾</div>
+                            <h4>Ketahanan Pangan</h4>
+                            <p>Simulasi virtual farm management</p>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">👥</div>
+                            <h4>SDM Training</h4>
+                            <p>Virtual workshop pengembangan skill</p>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">📱</div>
+                            <h4>Mobile Version</h4>
+                            <p>VR cardboard untuk smartphone</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="qr-section">
+                <h2>📲 DOWNLOAD DEMO</h2>
+                <div class="qr-code">📱</div>
+                <p><strong>Scan untuk download demo mobile</strong></p>
+                <p>Compatible dengan VR cardboard</p>
+                <div class="highlight">FREE TRIAL - 7 hari</div>
+            </div>
+
+            <div class="slide">
+                <h3>💰 PRICING & PACKAGES</h3>
+                <div class="slide-content">
+                    <div class="stats-grid">
+                        <div class="stat-card" style="background: linear-gradient(135deg, #11998e, #38ef7d);">
+                            <div class="stat-number">📚</div>
+                            <h4>Student License</h4>
+                            <p><strong>Rp 500.000</strong></p>
+                            <p>Individual license, basic content</p>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <div class="stat-number">🏫</div>
+                            <h4>School License</h4>
+                            <p><strong>Rp 2.500.000</strong></p>
+                            <p>Institutional license, full content</p>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #fc466b, #3f5efb);">
+                            <div class="stat-number">🏢</div>
+                            <h4>Enterprise License</h4>
+                            <p><strong>Rp 7.000.000</strong></p>
+                            <p>Multi-campus, custom content</p>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);">
+                            <div class="stat-number">👑</div>
+                            <h4>Premium Package</h4>
+                            <p><strong>Rp 15.000.000</strong></p>
+                            <p>Full suite + hardware bundle</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h3>🔧 TECHNICAL SPECIFICATIONS</h3>
+                <div class="slide-content">
+                    <ul class="feature-list">
+                        <li><strong>Platform Support:</strong> Oculus Quest 2/3, HTC Vive, Valve Index, PICO 4</li>
+                        <li><strong>Minimum Requirements:</strong> Android 8.0+, iOS 12+, Windows 10</li>
+                        <li><strong>Graphics:</strong> 4K per eye, 90-120 FPS, HDR rendering</li>
+                        <li><strong>Audio:</strong> 3D spatial audio, voice recognition Indonesia</li>
+                        <li><strong>Interaction:</strong> Hand tracking, eye tracking, haptic feedback</li>
+                        <li><strong>Network:</strong> Offline mode, cloud sync, multiplayer support</li>
                     </ul>
                 </div>
             </div>
 
-            <div class="features-grid fade-in">
-                <div class="feature-card">
-                    <div class="feature-icon vr-icon">🥽</div>
-                    <h3>Edukasi + Hiburan</h3>
-                    <p>Bukan sekadar game, tapi media pembelajaran yang fun dan bermanfaat</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon vr-icon">🌟</div>
-                    <h3>Teknologi Modern</h3>
-                    <p>Menggunakan VR untuk menciptakan pengalaman belajar yang imersif</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon vr-icon">📱</div>
-                    <h3>Konten Relevan</h3>
-                    <p>Fokus pada isu penting bangsa: pangan & SDM</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon vr-icon">🔄</div>
-                    <h3>Update Berkala</h3>
-                    <p>Konten selalu diperbarui agar tetap segar dan sesuai kebutuhan</p>
-                </div>
-            </div>
-
-            <div class="chapters-container fade-in">
-                <div class="chapters-intro">
-                    <h3>Fitur Utama - Story Open World</h3>
-                    <p>Jelajah bebas + misi edukatif dengan grafis kece, interaktif, bikin kritis!</p>
-                </div>
-                
-                <div class="chapters-grid">
-                    <div class="chapter">
-                        <h3>Chapter 1:</h3>
-                        <p>Ketahanan Pangan Indonesia</p>
-                    </div>
-                    <div class="chapter">
-                        <h3>Chapter 2:</h3>
-                        <p>Pentingnya SDM (pendidikan, literasi, sosialisasi)</p>
+            <div class="slide">
+                <h3>📈 ROADMAP PENGEMBANGAN</h3>
+                <div class="slide-content">
+                    <div class="process-flow">
+                        <div class="process-step">
+                            <strong>Q1 2025</strong><br>
+                            Beta testing & soft launch
+                        </div>
+                        <div class="process-step">
+                            <strong>Q2 2025</strong><br>
+                            Public release & partnership
+                        </div>
+                        <div class="process-step">
+                            <strong>Q3 2025</strong><br>
+                            Expansion ke 100 sekolah
+                        </div>
+                        <div class="process-step">
+                            <strong>Q4 2025</strong><br>
+                            International market entry
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section id="target" class="section">
-        <div class="container">
-            <h2 class="section-title fade-in">Target Pengguna</h2>
-            <div class="target-grid fade-in">
-                <div class="target-card">
-                    <h3>Pelajar & Mahasiswa <span class="arrow">→</span></h3>
-                    <p>Generasi penerus yang perlu peka terhadap isu pangan & pendidikan</p>
-                </div>
-                <div class="target-card">
-                    <h3>Sekolah & Universitas <span class="arrow">→</span></h3>
-                    <p>Media pembelajaran modern yang interaktif</p>
-                </div>
-                <div class="target-card">
-                    <h3>Museum & Wisata Edukasi <span class="arrow">→</span></h3>
-                    <p>Atraksi inovatif untuk edukasi publik</p>
-                </div>
-                <div class="target-card">
-                    <h3>Masyarakat Umum <span class="arrow">→</span></h3>
-                    <p>Belajar sambil bermain dengan cara baru</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="business" class="section">
-        <div class="container">
-            <h2 class="section-title fade-in">Potensi Bisnis</h2>
-            <div class="business-highlight fade-in">
-                <h3>Investasi Menguntungkan</h3>
-                <div class="price-highlight">Rp7.000.000/unit</div>
-                <p>dengan opsi lisensi untuk lembaga pendidikan</p>
-                <p class="subtitle">Hanya dengan penjualan <strong>7 unit</strong>, modal awal sudah tertutup (Break Even Point). Artinya, proyek ini cepat balik modal dan berpotensi menghasilkan keuntungan besar</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="roadmap" class="section">
-        <div class="container">
-            <h2 class="section-title fade-in">Roadmap Pengembangan</h2>
-            <div class="roadmap-grid fade-in">
-                <div class="roadmap-card">
-                    <div class="roadmap-phase">0–6 Bulan</div>
-                    <h3>Fase Riset</h3>
-                    <p>Riset & pembuatan prototype</p>
-                </div>
-                <div class="roadmap-card">
-                    <div class="roadmap-phase">Tahun 1</div>
-                    <h3>Peluncuran</h3>
-                    <p>Peluncuran produk & promosi ke sekolah</p>
-                </div>
-                <div class="roadmap-card">
-                    <div class="roadmap-phase">Tahun 2</div>
-                    <h3>Ekspansi</h3>
-                    <p>Produksi massal, masuk museum & wisata edukatif</p>
-                </div>
-                <div class="roadmap-card">
-                    <div class="roadmap-phase">Tahun 3</div>
-                    <h3>Global</h3>
-                    <p>Ekspansi nasional & internasional</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 VutuRe Project - Belajar Lebih Nyata, Masa Depan Lebih Kuat</p>
-        </div>
-    </footer>
+        </section>
+    </div>
 
     <script>
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+        function showSection(sectionName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all nav buttons
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionName).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Add smooth scrolling and interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate slides on scroll
+            const slides = document.querySelectorAll('.slide');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationDelay = Math.random() * 0.3 + 's';
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            });
+            
+            slides.forEach(slide => {
+                observer.observe(slide);
+            });
+
+            // Add hover sound effect simulation
+            const buttons = document.querySelectorAll('.nav-btn, .stat-card');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.filter = 'brightness(1.1)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.filter = 'brightness(1)';
+                });
+            });
+
+            // Add parallax effect to header
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const header = document.querySelector('.header');
+                if (header) {
+                    header.style.transform = `translateY(${scrolled * 0.5}px)`;
                 }
+            });
+
+            // Interactive QR codes
+            const qrCodes = document.querySelectorAll('.qr-code');
+            qrCodes.forEach(qr => {
+                qr.addEventListener('click', function() {
+                    this.style.transform = 'scale(1.1) rotate(5deg)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1) rotate(0deg)';
+                    }, 200);
+                });
             });
         });
 
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
-            } else {
-                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+        // Add CSS animation classes
+        const style = document.createElement('style');
+        style.textContent = `
+            .animate-in {
+                animation: slideInUp 0.6s ease forwards;
             }
-        });
+            
+            @keyframes slideInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .slide {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: all 0.6s ease;
+            }
+            
+            .slide.animate-in {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
