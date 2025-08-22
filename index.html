@@ -391,8 +391,20 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🥽 VR EDUCATION INDONESIA</h1>
-            <p>Revolusi Pembelajaran Interaktif untuk Masa Depan Bangsa</p>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <img src="vr-logo.png" 
+                     alt="VR Education Logo" 
+                     class="logo-image" 
+                     style="width: 80px; height: 80px; filter: drop-shadow(0 10px 30px rgba(0,212,170,0.3)); animation: logoFloat 3s ease-in-out infinite;"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="width: 80px; height: 80px; background: linear-gradient(135deg, #00d4aa, #667eea); border-radius: 50%; display: none; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,212,170,0.3); animation: logoFloat 3s ease-in-out infinite;">
+                    <span style="font-size: 2.5rem; color: white;">VR</span>
+                </div>
+                <div>
+                    <h1 style="margin-bottom: 0;">🥽 VR EDUCATION INDONESIA</h1>
+                    <p>Revolusi Pembelajaran Interaktif untuk Masa Depan Bangsa</p>
+                </div>
+            </div>
         </div>
 
         <nav class="navigation">
